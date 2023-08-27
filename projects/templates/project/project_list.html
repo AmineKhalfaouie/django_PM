@@ -1,11 +1,57 @@
+{% extends 'base.html' %}
 {% load i18n %}
+{% load humanize %}
+
 {% block content %}
-    <h3>{% trans 'My Project' %}</h3>
-    <ul>
+    <div class="d-flex">
+        <h3 class="me-auto">{% trans 'My Projects' %}</h3>
+        <div>
+            <a href="{% url 'project_create' %}" class="btn btn-outline-success">
+                <i class="bi bi-plus-lg"></i> {% trans 'New Project' %}
+            </a>
+        </div>
+    </div>
+
+    <div class="row my-5">
         {% for project in object_list %}
-            <li>{{project.title}} <a href="{% url 'project_update' project.id %}">Edit</a></li>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p>
+                            <span class="badge rounded-pill bg-dark">
+                                {{project.get_status_display}}
+                            </span>
+                        </p>
+                        <h3 class="card-title fs-6">{{project.title}}</h3>
+                        <p class="card-text text-muted small">{{project.description}}</p>
+                        <div class="d-flex">
+                            <span class="me-auto text-muted small">
+                                <i class="bi bi-clock"></i>
+                                <time datetime="{{project.created_at}}">{{project.created_at|naturaltime}}</time>
+                            </span>
+                            <a href="{% url 'project_update' project.id %}" class="btn btn-sm btn-outline-success mx-1">
+                                {% trans 'Edit' %}
+                            </a>
+                            <a href="{% url 'project_delete' project.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% empty %}
-            <li>{% trans 'there are no projects to show' %}</li>
+            <div class="col-md-12">
+                <div class="h-100 p-5 bg-white border rounded-3 text-center">
+                    <p>{% trans 'there are no projects to show' %}</p>
+                    <p>
+                        <i class="bi bi-emoji-frown fs-1"></i>
+                    </p>
+                    <a href="{% url 'project_create' %}" class="btn btn-success">
+                        <i class="bi bi-plus-lg"></i> {% trans 'New Project' %}
+                    </a>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+
 {% endblock %}

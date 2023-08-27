@@ -2,7 +2,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from . import models
 from . import forms
-
 # Create your views here.
 class ProjectListView(ListView):
     model = models.Project

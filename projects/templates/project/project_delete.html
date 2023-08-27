@@ -1,9 +1,15 @@
+{% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <h3>Are you sure to delete this project ?</h3>
+
+    <h2>{% trans 'Alert' %}</h2>
     <form method="post">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Submit">
+        <p class="text-muted my-4">
+            {% trans 'are you sure to delete' %} {{project.title}}?
+            <!-- fi 9aweleb django nasta3mel project 3iwadhan 3an Project alati hya to3ado kitaba
+            5asa bil classet fi python ama fi django naktob project-->
+        </p>
+        <input class="btn btn-danger" type="submit" value="{% trans 'Delete'%}">
     </form>
 {% endblock %}

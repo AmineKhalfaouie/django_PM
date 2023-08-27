@@ -22,6 +22,8 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,null=True)
+    #PROTECT:idha fasa5t category mattfasa5ch lmachari3 eli 3andha 3ale9a bil category hadhika
+    #CASCADE:idha fasa5t l user yetfasa5 lmachari3 mte3o lkol
 
     def __str__(self):
         return self.title
@@ -30,6 +32,7 @@ class Task(models.Model):
     description = models.TextField()
     is_completed = models.BooleanField(default=False)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-
+    class Meta:
+        ordering = ["is_completed"]
     def __str__(self):
         return self.description
