@@ -25,6 +25,7 @@
           </li>
         </ul>
         <form method="get" action="{% url 'project_list' %}" class="d-flex">
+          {% csrf_token %}
           <div class="input-group">
             <input
                     type="text"
