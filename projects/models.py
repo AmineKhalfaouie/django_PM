@@ -8,6 +8,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Category")
 
 class ProjectStatus(models.IntegerChoices):
     PENDING = 1, _('Pending')
@@ -25,6 +28,9 @@ class Project(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,null=True)
     #PROTECT:idha fasa5t category mattfasa5ch lmachari3 eli 3andha 3ale9a bil category hadhika
     #CASCADE:idha fasa5t l user yetfasa5 lmachari3 mte3o lkol
+    class Meta:
+        verbose_name = _("Project")
+        verbose_name_plural = _("Project")
 
     def __str__(self):
         return self.title
@@ -35,5 +41,7 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     class Meta:
         ordering = ["is_completed"]
+        verbose_name = _("Task")
+        verbose_name_plural = _("Task")
     def __str__(self):
         return self.description
